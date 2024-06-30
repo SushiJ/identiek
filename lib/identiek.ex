@@ -10,17 +10,19 @@ defmodule Identiek do
   def main(input) do
     input
     |> calculate_hash()
-
-    # |> get_color()
+    |> get_color()
   end
 
   defp calculate_hash(input) do
-    :crypto.hash(:md5, input)
-    |> :binary.bin_to_list()
+    hex =
+      :crypto.hash(:md5, input)
+      |> :binary.bin_to_list()
+
+    %Identiek.Image{hex: hex}
   end
 
-  # defp get_color(list) do
-  #   list
-  #   |> Enum.take(3)
-  # end
+  defp get_color(struct) do
+    hex = struct
+    Enum.take(hex.hex, 3)
+  end
 end
