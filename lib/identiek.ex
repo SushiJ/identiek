@@ -35,8 +35,8 @@ defmodule Identiek do
   end
 
   defp build_grid(list) do
-    # INFO: &mirror_row(&1) same as fn l ->  mirror_row(l) end
-    Enum.map(list, &mirror_row(&1))
+    # INFO: &mirror_row(&1) / &mirror_row/1 same as fn l ->  mirror_row(l) end
+    Enum.map(list, &mirror_row/1)
   end
 
   defp mirror_row(list) do
