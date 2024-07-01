@@ -2,7 +2,6 @@ defmodule Identiek do
   @moduledoc """
   Documentation for `Identiek`.
   """
-
   def hello do
     :world
   end
@@ -14,6 +13,8 @@ defmodule Identiek do
     |> build_grid()
     |> fliter_out_odd()
     |> build_pixel_map()
+    |> draw_image()
+    |> save_image(input)
   end
 
   defp calculate_hash(input) do
@@ -68,5 +69,23 @@ defmodule Identiek do
       end)
 
     %Identiek.Image{image | pixel_map: pixel_map}
+  end
+
+  defp draw_image(%Identiek.Image{color: color, pixel_map: pixel_map}) do
+    image = :egd.create(250, 250)
+    fill = :egd.color(List.to_tuple(color))
+
+    Enum.each(pixel_map, fn {start, stop} ->
+      :egd.filledRectangle(image, start, stop, fill)
+    end)
+
+    :egd.render(image)
+  end
+
+  defp save_image(image, file_name) do
+    case File.write("#{file_name}.png", image) do
+      {:error, err} -> IO.puts("Failed to save image #{err}")
+      :ok -> IO.puts("Saved #{file_name}.png")
+    end
   end
 end
