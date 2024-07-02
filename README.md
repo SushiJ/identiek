@@ -1,8 +1,7 @@
 # Identiek
 
-Identicon generator in elixir
+![Identicon](https://en.wikipedia.org/wiki/Identicon) generator in elixir
 
-Depends upon
 ```elixir
  {:egd, github: "erlang/egd"}
 ```
